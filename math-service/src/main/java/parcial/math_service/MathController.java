@@ -17,7 +17,9 @@ public class MathController {
     public ResponseEntity<?> lucasSequence(@RequestParam("value") String valueStr){
 
         int value = Integer.parseInt(valueStr);
-        List<Integer> sequence = lucasSequenceRecursive(value);
+        List<Integer> list = new ArrayList<>();
+        int cont = 0;
+        List<Integer> sequence = lucasSequenceRecursive(list, cont, value);
         System.out.println(sequence);
 
         Map<String, String> response = new LinkedHashMap<>();
@@ -27,17 +29,17 @@ public class MathController {
         return ResponseEntity.ok(response);
     }
 
-    public List<Integer> lucasSequenceRecursive(int n){
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < (n+1); i++){
-            if (i == 0){
-                list.add(2);
-            } else if (i == 1) {
-                list.add(1);
-            } else {
-               list.add(list.get(i-1) + list.get(i-2));
-            }
+    public List<Integer> lucasSequenceRecursive(List<Integer> list, int cont ,int n){
+        if (cont > n ){
+            return list;
+        } else if (cont == 0) {
+            list.add(2);
+        } else if (cont == 1) {
+            list.add(1);
+        } else if (cont >= 2){
+            list.add(list.get(cont-1) + list.get(cont-2));
         }
-        return list;
+        cont++;
+        return lucasSequenceRecursive(list, cont, n);
     }
 }
