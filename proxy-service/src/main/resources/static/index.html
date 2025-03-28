@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lucas Sequence</title>
+    <script>
+
+
+        function loadGetMsg() {
+                let nameVar = document.getElementById("value").value;
+                const xhttp = new XMLHttpRequest();
+                xhttp.onload = function() {
+                    document.getElementById("result").innerHTML =
+                    this.responseText;
+                }
+                xhttp.open("GET", "/lucasseq?value="+nameVar);
+                xhttp.send();
+            }
+    </script>
+</head>
+<body>
+    <h1>Lucas Sequence</h1>
+    <input type="text" id="value" placeholder="ej. 13">
+    <button onclick="loadGetMsg()">Click</button>
+    <pre id="result"></pre>
+</body>
+</html>
